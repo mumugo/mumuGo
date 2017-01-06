@@ -1,0 +1,161 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="keywords" content="网络借贷，网络贷款，万惠投融，网贷，小额贷款，投资理财">
+        <meta name="description" content="">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <title>three</title>
+        <script src="js/zepto.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/three.js"></script>
+        <style>
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        </style>
+    </head>
+    <body>
+        <!--content start-->
+        <!--content end-->
+        <script>
+            var win_width = $(window).width()*0.98; 
+            var win_height = $(window).height()*0.98; 
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 40, win_width / win_height, 0.1, 1000 );
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( win_width, win_height );
+            renderer.setClearColor( 0xf0f0f0 );
+            document.body.appendChild( renderer.domElement );
+            //摄像机设置
+            camera.position.x = 0;
+            camera.position.y = 80;
+            camera.position.z = 200;
+            camera.lookAt(scene.position);
+            //灯光设置
+            scene.add( new THREE.AmbientLight( 0x505050 ) );
+            var light = new THREE.SpotLight( 0xffffff, 1.5 );
+            light.position.set( 0, 500, 200 );
+            light.castShadow = true;
+
+            light.shadowCameraNear = 200;
+            light.shadowCameraFar = camera.far;
+            light.shadowCameraFov = 50;
+
+            light.shadowBias = -0.00022;
+
+            light.shadowMapWidth = 2048;
+            light.shadowMapHeight = 2048;
+
+            scene.add( light );
+
+            nodes = [];
+
+
+            window.onmousewheel = document.onmousewheel = function(e) {
+                if (e.wheelDelta>0) {
+                    camera.fov++;
+                } else {
+                    camera.fov--;
+                }
+                camera.updateProjectionMatrix();
+            };
+            window.onmousemove = document.onmousemove = function (e) {
+                var offsetX = e.offsetX - win_width/2;
+                var offsetY = e.offsetY - win_height/2;
+                //camera.position.x = offsetX/20;
+                //camera.position.y = -offsetY/20;
+                //camera.lookAt(scene.position);
+                //camera.updateProjectionMatrix();
+            }
+            
+            function renderSnake(snakes) {
+                for (var i = 0; i < nodes.length; i++) {
+                    scene.remove(nodes[i]);
+                }
+                for (var i = 0; i < snakes.length; i++) {
+                    for (var j = 0; j < snakes[i].nodes.length; j++) {
+                        var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+                        var material = new THREE.MeshLambertMaterial( { color: snakes[i].color } );
+                        var cube = new THREE.Mesh( geometry, material );
+                        cube.position.set( 6*snakes[i].nodes[j].x, 0, 6*snakes[i].nodes[j].y );
+                        scene.add(cube);
+                        nodes.push(cube);
+                    }
+                }
+
+
+                    
+            }
+            function renderApple (appleData) {
+                if (!window.apple) {
+                    var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+                    var material = new THREE.MeshLambertMaterial( { color: 0xff1100 } );
+                    window.apple = new THREE.Mesh( geometry, material );
+                    scene.add(apple);
+                }
+                apple.position.set(appleData.x * 6, 0, appleData.y * 6);
+            }
+            
+
+
+
+
+
+
+
+
+
+            var snakeGame = function () {
+
+            };
+            snakeGame.prototype.init = function () {
+                var that = this;
+                this.socket = io.connect();
+                this.socket.on('connect', function() {
+                    that.socket.emit('getNewSnake');
+                });
+                this.socket.on('gotSnake', function() {
+                    console.log('gotSnake');
+                });
+                this.socket.on('refreshData', function(params) {
+                    renderSnake(params.snakes);
+                    renderApple(params.apple);
+                    renderer.render( scene, camera );
+                });
+            };
+
+            
+            
+            //游戏部分
+            var snake = new snakeGame()
+            snake.init();
+
+            //键盘操作
+            var currentDirection = -1;
+            window.addEventListener( 'keydown', function(e){
+                switch(e.keyCode) {
+                    case 37: //左键
+                        var newD = -1;
+                        currentDirection = currentDirection == -newD?currentDirection:newD;
+                        break;
+                    case 38: //向上键
+                        var newD = -2;
+                        currentDirection = currentDirection == -newD?currentDirection:newD;
+                        break;
+                    case 39: //右键
+                        var newD = 1;
+                        currentDirection = currentDirection == -newD?currentDirection:newD;
+                        break;
+                    case 40: //向下键
+                        var newD = 2;
+                        currentDirection = currentDirection == -newD?currentDirection:newD;
+                        break;
+                    default:
+                        break;
+                }
+                snake.socket.emit('changeDirection', currentDirection);
+            }, false );
+        </script>
+    </body>
+</html>

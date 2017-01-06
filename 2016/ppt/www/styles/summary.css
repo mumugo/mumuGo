@@ -1,0 +1,128 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    font-family: "Microsoft YaHei" !important;
+}
+/*浮动*/
+.fl { float: left; display: inline; }
+.fr { float: right; display: inline; }
+.cf:before, .cf:after { content: ""; display: table; }
+.cf:after { clear: both; }
+.cf { *zoom: 1; }
+.clear { clear: both; font-size: 0; }
+
+li {
+    list-style: disc;
+}
+.step h1 {
+    font-size: 90px;
+    margin-bottom: 30px;
+}
+.step .person {
+    padding-right: 26px;
+    text-align: right;
+}
+.step .hd {
+    font-size: 50px;
+    margin: 35px 0;
+    font-weight: bold;
+}
+.tele-step .tele-h1{
+    font-size: 68px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.tele-step .tele-h2{
+    padding-left: 135px;
+    font-size: 36px;
+}
+.lml-step1 ul {
+    padding: 42px 50px 0;
+    font-size: 35px;
+    line-height: 66px;
+}
+.lml-step2 ul {
+    padding: 0 0 0 50px;
+    font-size: 26px;
+    line-height: 55px;
+}
+.lml-step2 img {
+    padding-top: 190px;
+}
+/*.lml-step2 .fl, .lml-step2 .fr{
+    width: 45%;
+}*/
+.zf-step1 li {
+    font-size: 36px;
+    line-height: 64px;
+}
+.zf-step2 .items {
+    font-size: 28px;
+    line-height: 46px;
+}
+.zf-step2 .infos {
+    font-size: 24px;
+    line-height: 42px;
+}
+.zf-step2 .hd2 {
+    margin: 30px 0 6px;
+    font-size: 30px;
+    font-weight: 700;
+}
+.zf-step3 li {
+    font-size: 36px;
+    line-height: 60px;
+}
+.zf-step4 li {
+    font-size: 35px;
+}
+.zf-step4 .hd2 {
+    font-weight: 700;
+    font-size: 40px;
+    margin: 30px 0 20px;
+}
+.zf-step6 li {
+    font-size: 40px;
+}
+.wz-step1 {
+    line-height: 60px;
+}
+.wz-step1 ul {
+    padding: 30px 0 0 30px;
+}
+.wz-step2 {
+    line-height: 55px;
+    font-size: 28px;
+}
+.wz-step2 ul {
+    padding: 30px 0 0 30px;
+}
+.wz-step3 {
+    line-height: 49px;
+    font-size: 25px;
+}
+.wz-step3 ul {
+    padding: 30px 0 0 30px;
+}
+.wz-step4 {
+    line-height: 42px;
+    font-size: 22px;
+}
+.zyj-step1 ul {
+    font-size: 28px;
+}
+.zyj-step1 .strong {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 10px 0;
+} 
+.zyj-step2 ul {
+    font-size: 32px;
+    line-height: 54px;
+}
+#ing img{
+    margin-top:40px;
+}
+
+
+
+
+

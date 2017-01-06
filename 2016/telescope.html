@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<style>
+			.content {
+				/*width: 800px;
+				margin: 0 auto;*/
+				padding-top: 80px;
+				text-align: center;
+				font: 12px/1.5 "Microsoft YaHei","Helvetica Neue", Helvetica Neue, Helvetica, Hiragino Sans GB,tahoma,arial,sans-serif;
+				font-size: 40px;
+				line-height: 30px;
+			}
+			.btn {
+				font-size: 30px;
+			}
+			.tip {
+				margin-bottom: 100px;
+			}
+			#next, #time, #countDown{
+				display: none;
+			}
+			#speaker {
+				font-size:70px;
+				margin: 100px 0 150px;
+			}
+			#telescope, #okList {
+				font-size: 30px;
+			}
+			#telescope {
+				height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="content">
+			<div id="lottery">
+				<p class="tip">Telescope~点击下面按钮抽签进行年度啦</p>
+				<p><a class="btn btn-primary btn-lg" href="#" role="button" id="btn-lottery">开始抽签</a></p>
+			</div>
+
+			<div id="countDown">
+				<div id="telescope"></div>
+				<div id="okList"></div>
+				<div id="speaker"></div>
+				<p><a class="btn btn-primary btn-lg" href="#" role="button" id="ready">开始倒计时</a></p>
+				<div id="time"></div>
+				<p><a class="btn btn-primary btn-lg" href="#" role="button" id="next">下一个</a></p>
+			</div>
+		</div>
+
+		<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+		<script>
+			// 返回日期
+			var newDate = function (str) {
+			    if (Number(str)) {
+			        return new Date(str);
+			    }
+			    if (str.toString().match(/\//)) {
+			        var str1 = str.split(' ')[0].split('/'), str2 = str.split(' ')[1].split(':');
+			        return new Date(str1[0], str1[1] - 1, str1[2], str2[0], str2[1], str2[2]);
+			    } else {
+			        return str;
+			    }
+			};
+
+			/*倒计时 start*/
+			//个位数+0
+			var checkTime = function (i) {
+			    i = parseInt(i);
+			    if (i < 10) {
+			        i = "0" + i;
+			    }
+			    return i;
+			};
+
+			function PPCountDown(options) {
+			    var defaults = {
+			        isDay: false,
+			        type: '',//显示毫秒 milli
+			        unit: false,//单位格式
+			        timeout: 1000,//倒计间隔
+			        from: '',//服务器时间
+			        to: '',//结束时间
+			        start: new Date(),//客户端时间
+			        refresh: function () { },//倒计时
+			        callback: function () { }//回调
+			    };
+			    this.options = $.extend(defaults, options);
+			    this.flag = true;
+			    this.totalTime = 0;//倒计时时间
+			}
+
+			PPCountDown.prototype.start = function () {
+			    var curr = newDate(this.options.from).getTime() + new Date().getTime() - (this.options.start).getTime(),
+			        to = newDate(this.options.to).getTime();
+			    if (to - curr > 0 && this.flag) {
+			        this.options.refresh(this, this.formatSecond((to - curr) / 1000));
+			    } else {
+			        this.options.callback();
+			        return;
+			    }
+			    var that = this;
+			    setTimeout(function () {
+			        that.start();
+			    }, this.options.timeout);
+			};
+
+			PPCountDown.prototype.stop = function () {
+			    this.flag = false;
+			};
+
+			PPCountDown.prototype.formatSecond = function (time) {
+			    this.totalTime = time;
+			    //is毫秒
+			    //is天
+			    //is单位
+			    var _milli = this.options.type == "milli" ? "." + parseInt(time * 10 % 10) : "";
+			    if (this.options.unit) {
+			        if (this.options.isDay) {
+			            return checkTime(time / 60 / 60 / 24) + "<span>天</span>" + checkTime(time / 60 / 60 % 24) + "<span>时</span>" + checkTime(time / 60 % 60) + "<span>分</span>" + checkTime(time % 60) + _milli + "<span>秒</span>";
+			        } else {
+			            return checkTime(time / 60 / 60) + "<span>时</span>" + checkTime(time / 60 % 60) + "<span>分</span>" + checkTime(time % 60) + _milli + "<span>秒</span>";
+			        }
+			    } else {
+			        if (this.options.isDay) {
+			            return checkTime(time / 60 / 60 / 24) + ":" + checkTime(time / 60 / 60 % 24) + ":" + checkTime(time / 60 % 60) + ":" + checkTime(time % 60) + _milli;
+			        } else {
+			            return checkTime(time / 60 / 60) + ":" + checkTime(time / 60 % 60) + ":" + checkTime(time % 60) + _milli;
+			        }
+			    }
+			};
+
+			/*********************************************************开始抽签组件*********************************************************/
+
+			function Lottery(options) {
+				this.index = 0;
+				this.speaker = '';
+				this.length = 0;
+				this.arrayList = options.arrayList;
+				this.startCallback = options.startCallback;
+				this.runCallback = options.runCallback;
+				this.refreshCallback = options.refreshCallback;
+			};
+
+			Lottery.prototype.init = function() {
+				this.length = this.arrayList.length;
+				this.start();
+			};
+
+			Lottery.prototype.start = function() {
+				$('#lottery').hide().siblings('#countDown').show();
+				!!this.startCallback && this.startCallback();
+			};
+
+			Lottery.prototype.run = function() {
+				var me = this;			
+				var nameRun = setInterval(function() {
+					me.index = Math.round(Math.random() * (me.length - 1));
+					me.speaker = me.arrayList[me.index];
+					!!me.runCallback && me.runCallback(me.speaker);
+				}, 30)
+
+				setTimeout(function() {
+					clearInterval(nameRun);
+					me.refreshList();
+					// okList.push(me.speaker);
+				},3000);
+				
+			};
+
+			Lottery.prototype.refreshList = function() {
+				this.arrayList.splice(this.index,1);
+				!!this.refreshCallback && this.refreshCallback(this.length, this.arrayList);
+			};
+
+			/*********************************************************结束抽签组件*********************************************************/
+
+			$(function() {
+
+				var telescope = [
+					// '叶俏锋',
+					'黄振',
+					'李敏仪',
+					'卢梦琳',
+					'谭德源',
+					'连先崇',
+					'吴恩宇',
+					'叶晓琪',
+					'张帆',
+					'张亚洁',
+					'王哲'
+				];
+
+				var lottery = new Lottery({
+					arrayList: telescope,
+					startCallback: function() {
+						var _html= '';
+						$.each(telescope, function(i, ele) {
+							_html += ele+" ";
+						})
+						$('#telescope').html('未总结的成员：'+ _html);
+					},
+					runCallback: function(data) {
+						$('#speaker').html(data);
+					},
+					refreshCallback: function(len, list) {
+						if(len != 0) {
+							var _html= '';
+							$.each(list, function(i, ele) {
+								_html += ele+" "
+							})
+							$('#telescope').html('未总结的成员：'+ _html);
+						} else {
+							$('#telescope').remove();
+						}
+					}
+				});
+
+				$('#btn-lottery').click(function() {
+					lottery.init();
+					lottery.run();
+				});
+
+				$('#ready').click(function() {
+					count = null;
+					$(this).hide();
+					$('#time').show();
+					count = new PPCountDown({
+						from: new Date().getTime(),
+						to: new Date().getTime() + 5*1000*60,
+						refresh: function (elem, time) {
+							$('#time').text(time);
+						},
+						callback: function () {
+							if(telescope.length == 0) { 
+								$('.content').html('Telescope所有成员总结完毕！撒花~');
+								return;
+							}
+							$('#time').hide();
+							$('#next').show();
+						}
+					}).start();
+				});
+
+				$('#next').click(function() {
+					lottery.run();
+					$('#ready').show();
+					$(this).hide();
+				})
+			});
+		</script>
+	</body>
+	</html>	
