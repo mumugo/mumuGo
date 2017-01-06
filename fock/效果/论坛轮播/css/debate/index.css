@@ -1,0 +1,198 @@
+/*
+新增版本号配置
+background: #0e0610 url(../../img/debate/banner.jpg?v=@PPmoneyVersion) no-repeat center 0;
+ */
+
+/*banner-wrap*/
+.banner-wrap {background: #fff url(../../img/debate/banner.jpg?v=@PPmoneyVersion) no-repeat center 0;border-bottom: 2px dashed #034295}
+.banner-wrap .banner {position: relative;width: 1100px;height: 603px;margin: 0 auto; }
+
+/*share*/
+.ft-wrap{background-color: #cc8932}
+.ft-wrap .ft{width: 1000px;margin: 0 auto;padding:20px 10px;}
+.share-c span{margin-top: 25px;font-size: 20px;color:#fff;}
+.share-c{float:left;position: relative;top: 20px;padding-right:40px; text-align: left;}
+.share-c .bshare-custom.icon-medium-plus a{width: 75px !important;height: 70px !important;background: url("../../img/debate/icon.png?v=@PPmoneyVersion") !important;padding-left: 0 !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-qqmb{background-position:225px 0 !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-weixin{background-position:150px 0 !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-qzone{background-position:75px 0 !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-sinaminiblog:hover{background-position:300px 70px !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-qqmb:hover{background-position:225px 70px !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-weixin:hover{background-position:150px 70px !important;}
+.share-c .bshare-custom.icon-medium-plus .bshare-qzone:hover{background-position:75px 70px !important;}
+
+.fir-wrap{background-color: #fff;}
+.sec-wrap{background-color: #f5e9d8;}
+.fir,.sec{width:1000px;margin:0 auto;padding: 30px 0 50px;}
+.fir .hd{position:relative; height:754px;background: url(../../img/debate/01.jpg?v=@PPmoneyVersion) no-repeat center 0;}
+.fir .btn-wrap{text-align: center;}
+.fir .btn{
+	display: inline-block;
+	padding: 10px 30px;
+	font-size: 51px;
+	font-weight: bold;
+	color: #fff;
+	border-bottom: 7px solid #d38528;
+	border-radius: 10px;
+	background-color: #ffbb51;
+}
+.fir .btn:hover{
+	text-decoration: none;
+	background-color: #eea739;
+}
+.fir .hd .btn{
+	position: absolute;
+	bottom: 39px;
+	padding: 2px 42px;
+	font-size: 30px;
+}
+.fir .btn.btn-agree{
+	left: 153px;
+	color: #a24e10;
+	background: #fbec00;
+	border-color: #965012;
+}
+.fir .btn.btn-agree:hover{
+	background: #dfd204;
+}
+.fir .btn.btn-oppose:hover{
+	background: #e48d04;
+}
+.fir .btn.btn-oppose{
+	left: 691px;
+	color: #fff;
+	background: #ff9c00;
+	border-color: #69460e;
+}
+.sec .hd{height:290px;background: url(../../img/debate/02.png?v=@PPmoneyVersion) no-repeat center 0;}
+.sec ul{
+	font-size: 15px;
+	line-height: 30px;
+	color: #151515;
+}
+.sec ul .em{
+	color: #ff1a1a;
+}
+.carousel-wrap{
+	float: left;
+	width: 430px;
+	height: 240px;
+	margin: 30px 0 45px;
+	background-color: #eeece8;
+}
+.carousel-wrap.fr{float: right;}
+.carousel-wrap .title{
+	text-align: center;
+	font-size: 24px;
+	color: #fff;
+	line-height: 30px;
+}
+.title.bg-blue{background-color: #0678cc}
+.title.bg-red{background-color: #c93930}
+.carousel-wrap ul{
+	height: 209px;
+	border: 1px solid #b3b3b3;
+	border-top: 0;
+	overflow: hidden;
+}
+.carousel-wrap li{
+	width:428px;
+	height: 100px;
+	margin-bottom: 10px;
+	opacity: 1;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+	background-color: #fff;
+}
+
+.carousel-wrap li.marginB{
+	animation: mySec 1s;
+	-moz-animation: mySec 1s;	
+	-webkit-animation: mySec 1s;	
+	-o-animation: mySec 1s;	
+}
+
+.carousel-wrap li.animated{
+	animation: myfirst 1s;
+	-moz-animation: myfirst 1s;	
+	-webkit-animation: myfirst 1s;	
+	-o-animation: myfirst 1s;	
+}
+
+.carousel-wrap .item-hd{
+	padding: 4px 10px 3px;
+	font-size: 16px;
+	color: #51aded;
+	border-bottom: 1px dashed #ddd;
+}
+.carousel-wrap .item-bd{
+	height: 66px;
+	padding: 3px 10px 0;
+	font-size: 14px;
+	color: #444;
+	overflow: hidden;
+}
+.carousel-wrap .warm-tip{
+	padding-top: 75px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+@keyframes myfirst
+{
+0% {opacity: 1;transform: matrix(1, 0, 0, 1, 0, 0);}
+25%{height: 100px;margin-bottom: 10px;}
+50% {opacity: 0;transform: matrix(0.5, 0, 0, 0.5, 0, -10);}
+75%{height: 0;margin: 0;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0% {opacity: 1;transform: matrix(1, 0, 0, 1, 0, 0);}
+25%{height: 100px;margin-bottom: 10px;}
+50% {opacity: 0;transform: matrix(0.5, 0, 0, 0.5, 0, -10);}
+75%{height: 0;margin: 0;}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+0% {opacity: 1;transform: matrix(1, 0, 0, 1, 0, 0);}
+25%{height: 100px;margin-bottom: 10px;}
+50% {opacity: 0;transform: matrix(0.5, 0, 0, 0.5, 0, -10);}
+75%{height: 0;margin: 0;}
+}
+
+@-o-keyframes mySec /* Opera */
+{
+25%{margin-bottom: 10px;}
+50% {margin-bottom: 100px;}
+100%{margin-bottom: 10px;}
+}
+
+@keyframes mySec
+{
+25%{margin-bottom: 10px;}
+50% {margin-bottom: 100px;}
+100%{margin-bottom: 10px;}
+}
+
+@-moz-keyframes mySec /* Firefox */
+{
+25%{margin-bottom: 10px;}
+50% {margin-bottom: 100px;}
+100%{margin-bottom: 10px;}
+}
+
+@-webkit-keyframes mySec /* Safari 和 Chrome */
+{
+25%{margin-bottom: 10px;}
+50% {margin-bottom: 100px;}
+100%{margin-bottom: 10px;}
+}
+
+@-o-keyframes mySec /* Opera */
+{
+25%{margin-bottom: 10px;}
+50% {margin-bottom: 100px;}
+100%{margin-bottom: 10px;}
+}

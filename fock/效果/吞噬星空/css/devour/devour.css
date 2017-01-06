@@ -1,0 +1,14 @@
+﻿body {
+	margin: 0;
+	padding: 0;
+	background-color: #f2e1c7;
+	font-family: "微软雅黑";
+	overflow: hidden;
+}
+p {
+	margin: 0;
+}
+#devour {
+	box-sizing: border-box;
+	border: 2px solid #999999;
+}

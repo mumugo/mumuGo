@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/* Positioning and Sizing the Canvas  */
+ #flag {
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    left: 45%;
+    top: 40%;
+    z-index: 100;
+    opacity: 0.80;
+    margin-right: 50px;
+    margin-left: 50px;
+ }
+ /* Media Queries to make the canvas responsive  */
+ @media (max-width: 600px) {
+    #flag {
+        width: 400px;
+        height: 325px;
+    }
+ }
+ @media (max-width: 500px) {
+    #flag {
+        width: 350px;
+        height: 280px;
+    }
+ }
+ @media (max-width: 300) {
+    #flag {
+        width: 260px;
+        height: 180px;
+    }
+ }
+ body {
+     background-position: center center;   
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #00305b;
+ }
+    
+ html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+ }
+	</style>
+</head>
+<body>
+	<canvas id="flag"></canvas>
+	<script type="text/javascript">
+		
+		window.onload = function() {
+    var flag = document.getElementById('flag');
+    drawAmericanFlag(flag, 320, 0, 40);
+    flag.style.marginLeft = -(flag.width / 2) + 'px';
+    flag.style.marginTop = -(flag.height / 2) + 'px';
+    var timer = waveFlag(flag, 20, 10, 150, 200, -0.1);
+ };
+ function drawAmericanFlag(canvas, width, padX, padY) {
+    if (!padX) padX = 0;
+    if (!padY) padY = 0;
+    var a = width / 1.9;
+    var b = width;
+    var c = 7 * a / 13;
+    var d = 0.76 * a;
+    var e = 0.054 * a;
+    var g = 0.063 * a;
+    var k = 0.0616 * a;
+    var l = a / 13;
+    canvas.width = b + 2 * padX;
+    canvas.height = a + 2 * padY;
+    var ctx = canvas.getContext('2d');
+    // Stripes
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(padX, padY, b, a);
+    ctx.fillStyle = '#900';
+    for (var i = 0; i < 13; i += 2) ctx.fillRect(padX, i * l + padY, b, l);
+    // End Stripes
+    // Begin Circle Background
+    ctx.fillStyle = "rgb(0,0,141)";
+    ctx.beginPath();
+    //  The moveTo() method moves the path to the specified point in the canvas, without creating a line.
+    //  Internet Explorer 9, Firefox, Opera, Chrome, and Safari support the moveTo() method.
+    //  Tip: Use the stroke() method to actually draw the path on the canvas.
+    ctx.moveTo(220, 113);
+    ctx.bezierCurveTo(220, 115, 220, 117, 220, 119);
+    ctx.bezierCurveTo(220, 121, 219, 123, 219, 124);
+    ctx.bezierCurveTo(216, 147, 199, 167, 176, 172);
+    ctx.bezierCurveTo(173, 173, 169, 173, 165, 174);
+    ctx.bezierCurveTo(163, 174, 161, 174, 159, 174);
+    ctx.bezierCurveTo(157, 174, 156, 174, 154, 173);
+    ctx.bezierCurveTo(131, 170, 112, 153, 106, 131);
+    ctx.bezierCurveTo(105, 127, 105, 123, 104, 119);
+    ctx.bezierCurveTo(104, 117, 104, 115, 104, 114);
+    ctx.bezierCurveTo(104, 112, 105, 110, 105, 108);
+    ctx.bezierCurveTo(108, 85, 125, 66, 148, 60);
+    ctx.bezierCurveTo(152, 59, 156, 59, 159, 58);
+    ctx.bezierCurveTo(161, 58, 163, 58, 165, 58);
+    ctx.bezierCurveTo(167, 59, 168, 59, 170, 59);
+    ctx.bezierCurveTo(193, 62, 212, 79, 218, 102);
+    ctx.bezierCurveTo(219, 106, 219, 109, 220, 113);
+    ctx.fill();
+    // END Circle Background
+    // Flag Border
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(padX, padY, b, a); 
+ }
+ // BEGIN Wave Animation Script
+ function waveFlag(canvas, wavelength, amplitude, period, shading, squeeze) {
+    if (!squeeze) squeeze = 0;
+    if (!shading) shading = 100;
+    if (!period) period = 200;
+    if (!amplitude) amplitude = 10;
+    if (!wavelength) wavelength = canvas.width / 10;
+    var fps = 30;
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width,
+        h = canvas.height;
+    var od = ctx.getImageData(0, 0, w, h).data;
+    // var ct = 0, st=new Date;
+    return setInterval(function() {
+        var id = ctx.getImageData(0, 0, w, h);
+        var d = id.data;
+        var now = (new Date) / period;
+        for (var y = 0; y < h; ++y) {
+            var lastO = 0,
+                shade = 0;
+            var sq = (y - h / 2) * squeeze;
+            for (var x = 0; x < w; ++x) {
+                var px = (y * w + x) * 4;
+                var pct = x / w;
+                var o = Math.sin(x / wavelength - now) * amplitude * pct;
+                var y2 = y + (o + sq * pct) << 0;
+                var opx = (y2 * w + x) * 4;
+                shade = (o - lastO) * shading;
+                d[px] = od[opx] + shade;
+                d[px + 1] = od[opx + 1] + shade;
+                d[px + 2] = od[opx + 2] + shade;
+                d[px + 3] = od[opx + 3];
+                lastO = o;
+            }
+        }
+        ctx.putImageData(id, 0, 0);
+        // if ((++ct)%100 == 0) console.log( 1000 * ct / (new Date - st));
+    }, 1000 / fps);
+ }
+	</script>
+</body>
+</html>
