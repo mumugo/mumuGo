@@ -28,15 +28,25 @@
             </div>
         </div>
     </div>
-    <div id="loginWrapper">
+  <!--   <div id="loginWrapper">
         <p id="info">connecting to server...</p>
         <div id="nickWrapper">
             <input type="text" placeHolder="nickname" id="nicknameInput" />
             <input type="button" value="OK" id="loginBtn" />
         </div>
-    </div>
+    </div> -->
     <script src="/javascripts/jquery-1.11.0.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+   <!--  <script src="/socket.io/socket.io.js"></script> -->
+ <!--    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
+    <script src="/javascripts/socket.io.js"></script>
     <script src="/javascripts/mychat.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect();
+        // socket.on('news', function (data) {
+        //     console.log(data);
+        //     socket.emit('my other event', { my: 'data' });
+        // });
+
+    </script>
   </body>
 </html>

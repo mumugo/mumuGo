@@ -5,11 +5,17 @@ var status = $('#status');
 // var myName = false;
 
 //建立websocket连接
-socket = io.connect('http://localhost:8086');
+// socket = io.connect('http://localhost:8086');
 //收到server的连接确认
-socket.on('open',function(){
-    status.text('Choose a name:');
-});
+// socket.on('open',function(){
+//     status.text('Choose a name:');
+// });
+
+// socket.on('news', function (data) {
+// console.log(data);
+// socket.emit('my other event', { my: 'data' });
+// });
+
 
 //监听system事件，判断welcome或者disconnect，打印系统消息信息
 // socket.on('system',function(json){
