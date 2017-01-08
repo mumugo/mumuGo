@@ -1,0 +1,111 @@
+<html>
+<head>
+	<title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: #FFF5F5;
+        }
+        canvas {
+            display: block;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+    var T = {
+		$tag: function(name) {
+			var res = document.getElementsByTagName(name);
+			return res.length === 1 ? res[0] : res;
+		}
+	};
+
+	window.onload = function(){app()};
+
+	var canvas;
+	var app = (function() {
+		var ctx;
+		var balls = [];
+		var init = function() {
+			canvas = T.$tag("canvas");
+			canvas.width = document.body.scrollWidth;
+			canvas.height = (document.documentElement.scrollHeight > document.body.scrollHeight ? document.documentElement.scrollHeight : document.body.scrollHeight);
+			ctx = canvas.getContext("2d");
+			start();
+		};
+		var start = function() {
+			var x = -10, i = 1;
+			var timer = setInterval(function(){
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				balls.push(new Ball());
+				draw(balls);
+				check(balls);
+				update(balls);
+			}, 30);
+		};
+		var check = function(list) {
+			for (var i = list.length - 1; i >= 0; i--) {
+				if (list[i].y > canvas.height - 10) {
+					list[i].y = canvas.height - 10;
+					list[i].vx = list[i].vy = list[i].ay = 0;
+				}
+				if (list[i].colorA <= 0) {
+					balls.splice(i,1);
+				}
+			}
+
+		}
+		var draw = function(list) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			for (var i = list.length - 1; i >= 0; i--) {
+				ctx.fillStyle = list[i].color;
+				ctx.beginPath();
+				ctx.arc(list[i].x, list[i].y, list[i].r, 0,Math.PI*2,true);
+				ctx.closePath();
+				ctx.fill();
+			}
+		};
+		var update = function(list) {
+			var b;
+			for (var i = list.length - 1; i >= 0; i--) {
+				b = list[i];
+				b.x += b.vx;
+				b.y += b.vy;
+				b.vy += b.ay;
+				b.colorA -= 0.006;
+				b.color = b.colorRgb + b.colorA + ")";
+			}
+		};
+		return init
+	})();
+	
+	var Ball = function() {
+		this.r = 3;
+		this.colorRgb = "rgba(" + (255 - Math.floor(Math.random() * 200)) + "," + (255 - Math.floor(Math.random() * 200)) + "," + (255 - Math.floor(Math.random() * 200)) + ",";
+		this.colorA = 1;
+		this.color = this.colorRgb + this.colorA + ")";
+		this.x = canvas.width / 2;
+		this.y = canvas.height - 10;
+		this.vx = (Math.random() > 0.5 ? 1 : -1) * Math.random() * 6;
+		this.vy = -21;
+		this.ay = 0.55;
+	};
+</script>
+</body>
+</html>

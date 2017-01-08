@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>myWave</title>
+
+
+    <style>
+        html,body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+
+    <script type="text/javascript" src="sin.js"></script>
+    <script>
+
+        var data = {
+            canvas: document.getElementById("myCanvas"),
+            width: 320,
+            height: 60,
+            A: 10,//控制波长
+            fade: 0.1,//控制波长衰竭;
+            w: 40,//控制周期;
+            v: 0.2//控制水平速度
+        }
+        myWave = new wave(data);
+        myWave.render();
+
+
+    </script>
+</body>
+
+</html>
