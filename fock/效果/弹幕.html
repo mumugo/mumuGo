@@ -1,0 +1,115 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="utf-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <!--  
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />  
+    <link href="favicon.ico" rel="Bookmark" type="image/x-icon" />  
+    -->  
+    <meta name="Generator" content="EditPlus®">  
+    <meta name="Author" content="">  
+    <meta name="Keywords" content="">  
+    <meta name="Description" content="">  
+    <title>JQuery弹幕</title>  
+    <link href="" rel="stylesheet" />  
+    <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-1.10.2.min.js"></script>
+    <style type="text/css">  
+        .ctxt{  
+        	position: relative;
+            background:#666;  
+            width:1000px;  
+            height:400px;  
+            overflow:hidden;  
+            margin:0 auto;  
+        }  
+        .ctxt p{  
+            position:absolute;
+            display: inline-block;
+            width: 100%;
+            left:1000px;
+            margin:0;  
+            padding:0;  
+        }  
+    </style>  
+</head>  
+<body>  
+<div id="ctxt" class="ctxt"></div>  
+<br />  
+
+<script type="text/javascript">  
+	$(document).ready(function(){  
+	    var txtArray = [
+	    	'2333',
+	    	'666',
+	    	'PPmoney四周年',
+	    	'生日快乐',
+	    	'蒸蒸日上',
+	    	'开心O(∩_∩)O~~',
+	    	'哎呀，不错喔',
+	    	'双十二金融节',
+	    	'就差你了',
+	    	'今天天气不错喔',
+	    	'猜猜我是谁',
+	    	'宝叔V5',
+	    	'宝叔带我飞',
+	    	'你的名字',
+	    	'PP三巨头',
+	    	'好喜欢PPmoney',
+	    	'及贷上线啦',
+	    	'好多妹纸',
+	    	'你在哪了呀',
+	    	'wifi密码是多少',
+	    	'宝叔发红包',
+	    	'啦啦啦啦',
+
+	    ];
+	    var h = $("#ctxt").height()-30,
+	    	w = $("#ctxt").width();
+	    
+	    creatBarrage(txtArray, h, w).forEach(function(v,i){
+		    begin(v, h, w);
+		})
+	});
+
+	//绘制弹幕动画
+	function begin(v, h, w){
+    	var newtxt = '<p style="top:'+v.top+'px; color:'+v.color+'">'+v.txt+'</p>';  
+	    setTimeout(function(){
+	    	$(".ctxt").prepend(newtxt);  
+	    	$(".ctxt p").animate({left: "-"+v.left/8+"px"}, v.time, function(){
+	    		$(this).remove();
+	    	    begin(v, h, w);
+	    	});
+	    },1000)
+    }
+
+	//创建弹幕队列
+	function creatBarrage(txtArray,h,w) {
+		var arr = [];
+		txtArray.forEach(function(v,i){
+			var obj = {};
+			obj.txt = v;
+			obj.top = Math.random()*h;
+			obj.left = w;
+			obj.time = 5000 + Math.random()*(15000-5000+1);
+			obj.color = getReandomColor();
+			arr.push(obj);
+		})
+		return arr.sort(function(i,j){
+			return i.time - j.time;
+		})
+	}
+
+	//随机获取颜色值  
+	function getReandomColor(){  
+	    return '#'+(function(h){  
+	    	return new Array(7-h.length).join("0")+h  
+	    })((Math.random()*0x1000000<<0).toString(16))  
+	}
+  
+</script>  
+  
+</body>  
+</html> 
