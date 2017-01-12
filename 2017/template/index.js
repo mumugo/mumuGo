@@ -47,13 +47,18 @@ function parseXml(xml) {
     return xmldom;
 }
 
-var Go = function() {
+var Go = function(opt) {
+    this.opt = opt;
+};
 
-}
+// Go.prototype.compile = function() {
 
-Go.prototype.compile = function() {
+// }
 
-}
+(function() {
+
+})()
+
 
 
 //var target = document.getElementsByTagName()
