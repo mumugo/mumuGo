@@ -4,10 +4,7 @@ function createDocument() {
     if(typeof arguments.callee.activeXString != 'string') {
         var versions = ['MSXML2.DOMDocument.6.0', 'MSXML2.DOMDocument.3.0', 'MSXML2.DOMDocument.2.0'],
             i, len;
-        
-        /**
-         * 迭代可能的ActiveX版本。
-         */
+
         for (i = 0; len = versions.length; i++) {
             try {
                 new ActiveXObject(versions[i]);
@@ -51,22 +48,47 @@ var Go = function(opt) {
     this.opt = opt;
 };
 
-// Go.prototype.compile = function() {
+Go.prototype.init = function() {
+    this.compile();
+}
 
-// }
+Go.prototype.compile = function() {
+    var me = this,
+        ele = me.opt.ele,
+        target;
 
-(function() {
+    var scriptFlie = document.getElementsByTagName('script');
+    // var scriptSrc = scriptFlie.attributes['src'].value;
+    // console.log(scriptFlie)
+    // console.log(scriptFlie.attributes['src'].value)
 
-})()
+    if(typeof scriptFlie.attributes['src'].value != 'undefined') {
+        if (/\.go$/.test(scriptFlie.attributes['src'].value)) {
+            console.log(56)
+        }
+    }
+
+    if(/^\#/.test(ele)) {
+        target = document.getElementById(ele.slice(1, ele.length));    
+    } else if(/^\./.test(ele)) {
+        target = document.getElementsByClassName(ele.slice(1, ele.length));    
+    }
+    
+    var $template = document.getElementsByTagName('template');
+    var aa = parseXml(target);
+
+    console.log(target);
+    console.log($template);
+    console.log(aa)
+
+
+}
+
+// (function() {
+
+// })()
 
 
 
-//var target = document.getElementsByTagName()
 
-/**
- * 实现方式:
- * 类似handlebars var mallTpl = new Template(document.getElementById("mall-tpl").innerHTML);
- * 类似vue
- * 
- */
 
