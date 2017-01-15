@@ -36,9 +36,10 @@ var loadXML = function(xmlFile){
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET",xmlFile,false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
             xmlhttp.send(null);
-            var xmlDom = new DOMParser().parseFromString(xmlhttp.responseText, "text/xml");  //字符串转xml
-            console.log(xmlDom)
-            return xmlDom;
+            xmlDoc = xmlhttp.responseText;
+            var returnXML = new DOMParser().parseFromString(xmlDoc, "text/xml");
+            console.log(returnXML)
+            return returnXML;
         }
     }
     return xmlDoc;
@@ -53,13 +54,13 @@ Go.prototype.init = function() {
     var scriptFlie = document.getElementsByTagName('script');
     
     for(var i = 0; i < scriptFlie.length; i++) {
-        var fileSrc = scriptFlie[i].attributes['src'];
-        if(typeof fileSrc != 'undefined') {
-            if (/\.goo$/.test(fileSrc.value)) {
-                var xmldoc = loadXML(fileSrc.value);
-                var elements = xmldoc.getElementsByTagName("root");
-                me.compile(xmldoc);
-            }
+        var fileSrc = scriptFlie[i].attributes['src'],
+            fileType = scriptFlie[i].attributes['type'];
+
+        if(typeof fileType != 'undefined' && fileType.value === 'text/goo') {
+            var xmldoc = loadXML(fileSrc.value);
+           // var elements = xmldoc.getElementsByTagName("root");
+            me.compile(xmldoc);
         }
     }
 }
