@@ -31,18 +31,24 @@ var loadXML = function(xmlFile){
         try{
             xmlDoc.asyc = false;   //是否异步调用
             xmlDoc.load(xmlFile);  //文件路径
+            return xmlDoc;
         }catch(e){  
             //chrome，safari不支持load()方法，故用http协议，XMLHttpRequest对象。
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET",xmlFile,false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
+            xmlhttp.open("GET", xmlFile, false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
             xmlhttp.send(null);
-            xmlDoc = xmlhttp.responseText;
-            var returnXML = new DOMParser().parseFromString(xmlDoc, "text/xml");
-            console.log(returnXML)
-            return returnXML;
+            return new DOMParser().parseFromString(xmlhttp.responseText, "text/xml"); 
+
+            //XMLHttpRequest对象回调函数
+            // xmlhttp.onload = function(e) { 
+            //     if(this.status == 200||this.status == 304){
+                    // return new DOMParser().parseFromString(xmlhttp.responseText, "text/xml"); 
+                // }
+            // };
         }
     }
-    return xmlDoc;
+    // console.log(xmlDoc)
+    
 }
 
 var Go = function(opt) {
@@ -59,7 +65,6 @@ Go.prototype.init = function() {
 
         if(typeof fileType != 'undefined' && fileType.value === 'text/goo') {
             var xmldoc = loadXML(fileSrc.value);
-           // var elements = xmldoc.getElementsByTagName("root");
             me.compile(xmldoc);
         }
     }
@@ -67,8 +72,13 @@ Go.prototype.init = function() {
 
 Go.prototype.compile = function(xmldoc) {
     var me = this,
-        target;
+        temps;
+    
+    temps = xmldoc.getElementsByTagName("template");
     console.log(xmldoc)
+    console.log(xmldoc.innerHTML);
+    console.log(temps[0].nodeValue);
+
     // document.body.appendChild();
     // var $template = document.getElementsByTagName('template');
     // console.log($template);

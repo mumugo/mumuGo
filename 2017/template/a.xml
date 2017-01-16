@@ -1,3 +1,13 @@
 <root>
 	<child></child>
 </root>
+
+<style>
+    body {
+        color: red;
+    }
+</style>
+
+<script>
+	console.log(123)
+</script>
