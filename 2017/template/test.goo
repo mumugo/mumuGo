@@ -1,7 +1,18 @@
+<style>
+    body {
+        color: red;
+    }
+</style>
 
 <template>
-    <div id="xxx"></div>
+    <div id="xxx">{{name}}</div>
 </template>
+
+<script>
+	console.log(123)
+</script>
+
+
 
 
 

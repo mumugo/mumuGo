@@ -37,7 +37,7 @@ var loadXML = function(xmlFile){
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET", xmlFile, false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
             xmlhttp.send(null);
-            return new DOMParser().parseFromString(xmlhttp.responseText, "text/xml"); 
+            return new DOMParser().parseFromString('<go>' + xmlhttp.responseText + '</go>', "text/xml"); 
 
             //XMLHttpRequest对象回调函数
             // xmlhttp.onload = function(e) { 
@@ -47,12 +47,11 @@ var loadXML = function(xmlFile){
             // };
         }
     }
-    // console.log(xmlDoc)
-    
 }
 
 var Go = function(opt) {
     this.opt = opt;
+    this.init();
 };
 
 Go.prototype.init = function() {
@@ -71,34 +70,59 @@ Go.prototype.init = function() {
 }
 
 Go.prototype.compile = function(xmldoc) {
+    console.log(xmldoc);
+    var me = this;
+    me.compileTemplate(xmldoc);
+    me.compileStyle(xmldoc);
+    me.compileScript(xmldoc);
+}
+
+Go.prototype.compileTemplate = function(xmldoc) { 
     var me = this,
-        temps;
-    
+        temps, beforeHtml, modefiedHtml, attrName, target;
     temps = xmldoc.getElementsByTagName("template");
-    console.log(xmldoc)
-    console.log(xmldoc.innerHTML);
-    console.log(temps[0].nodeValue);
 
-    // document.body.appendChild();
-    // var $template = document.getElementsByTagName('template');
-    // console.log($template);
+    for (var i = 0; i < temps.length; i++) {
+        beforeHtml = temps[i].innerHTML;
 
+        attrName = beforeHtml.replace(/(.*)\{\{(.*)\}\}(.*)/g, '$2').replace(/\s/g, "");
+        modefiedHtml = beforeHtml.replace(/\{\{(.*)\}\}/g, me.opt.data[attrName]);
 
+        if (/^\#/g.test(me.opt.ele)) {
+            target = document.getElementById(me.opt.ele.slice(1, me.opt.ele.lenth));
+            target.innerHTML = modefiedHtml;
 
-    // if(/^\#/.test(ele)) {
-    //     target = document.getElementById(ele.slice(1, ele.length));    
-    // } else if(/^\./.test(ele)) {
-    //     target = document.getElementsByClassName(ele.slice(1, ele.length));    
-    // }
-    
-    // var $template = document.getElementsByTagName('template');
-    // var aa = parseXml(target);
+        } else if (/^\./g.test(me.opt.ele)) {
+            target = document.getElementsByClassName(me.opt.ele.slice(1, me.opt.ele.lenth));
+            for (var j = 0; j < target.length; j++) {
+                target[j].innerHTML = modefiedHtml;
+            }
+        }
+    }
+}
 
-    // console.log(target);
-    // console.log($template);
-    // console.log(aa)
+Go.prototype.compileStyle = function(xmldoc) { 
+    var me = this,
+        styleObj,
+        styleEles;
 
+    styleEles = xmldoc.getElementsByTagName("style");  
+    styleObj = document.createElement('style');
 
+    for (var i = 0; i < styleEles.length; i++) {
+        styleObj.innerHTML += styleEles[i].innerHTML;
+    }
+    document.body.appendChild(styleObj);
+}
+
+Go.prototype.compileScript = function(xmldoc) { 
+    var me = this,
+        scriptObj;
+
+    scriptObj = xmldoc.getElementsByTagName("script");  
+    for (var i = 0; i < scriptObj.length; i++) {
+        eval(scriptObj[i].innerHTML);
+    }
 }
 
 // (function() {
