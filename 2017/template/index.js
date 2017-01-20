@@ -49,6 +49,8 @@ var loadXML = function(xmlFile){
     }
 }
 
+//生命周期 数据双向绑定
+
 var Go = function(opt) {
     this.opt = opt;
     this.init();

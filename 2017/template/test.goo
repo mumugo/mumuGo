@@ -9,7 +9,12 @@
 </template>
 
 <script>
-	console.log(123)
+    new Go({
+        ele: "#app",
+        data: {
+            name: "amy"
+        }
+    });
 </script>
 
 
