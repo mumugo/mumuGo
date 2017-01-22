@@ -1,43 +1,45 @@
 //解析XML文件
-var loadXML = function(xmlFile){
-    var xmlDoc=null;
+var loadXML = function(xmlFile) {
+    var xmlDoc = null;
     //判断浏览器的类型
     //支持IE浏览器
-    if(!window.DOMParser && window.ActiveXObject){
+    if (!window.DOMParser && window.ActiveXObject) {
         var xmlDomVersions = ['MSXML.2.DOMDocument.6.0', 'MSXML.2.DOMDocument.3.0', 'Microsoft.XMLDOM'];
-        for(var i = 0; i < xmlDomVersions.length; i++){
-            try{
+        for (var i = 0; i < xmlDomVersions.length; i++) {
+            try {
                 xmlDoc = new ActiveXObject(xmlDomVersions[i]);
                 break;
-            }catch(e){
+            } catch (e) {
+                console.log(e);
             }
         }
-    } else if(document.implementation && document.implementation.createDocument){
+    } else if (document.implementation && document.implementation.createDocument) {
     	//支持Mozilla，opera浏览器
-        try{
+        try {
             /* document.implementation.createDocument('','',null); 方法的三个参数说明
             * 第一个参数是包含文档所使用的命名空间URI的字符串； 
             * 第二个参数是包含文档根元素名称的字符串； 
             * 第三个参数是要创建的文档类型（也称为doctype）
             */
-            xmlDoc = document.implementation.createDocument('','',null);
-        }catch(e){
+            xmlDoc = document.implementation.createDocument('', '', null);
+        } catch (e) {
+            console.log(e);
         }
-    } else{
+    } else {
         return null;
     }
 
-    if(xmlDoc!=null){
-        try{
+    if (xmlDoc != null) {
+        try {
             xmlDoc.asyc = false;   //是否异步调用
             xmlDoc.load(xmlFile);  //文件路径
             return xmlDoc;
-        }catch(e){  
+        } catch (e) {  
             //chrome，safari不支持load()方法，故用http协议，XMLHttpRequest对象。
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", xmlFile, false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
+            xmlhttp.open('GET', xmlFile, false);   //创建一个新的http请求，并指定此请求的方法、URL以及验证信息
             xmlhttp.send(null);
-            return new DOMParser().parseFromString('<go>' + xmlhttp.responseText + '</go>', "text/xml"); 
+            return new DOMParser().parseFromString('<go>' + xmlhttp.responseText + '</go>', 'text/xml'); 
 
             //XMLHttpRequest对象回调函数
             // xmlhttp.onload = function(e) { 
@@ -47,6 +49,7 @@ var loadXML = function(xmlFile){
             // };
         }
     }
+    return null;
 }
 
 //生命周期 数据双向绑定
@@ -60,11 +63,11 @@ Go.prototype.init = function() {
     var me = this;
     var scriptFlie = document.getElementsByTagName('script');
     
-    for(var i = 0; i < scriptFlie.length; i++) {
+    for (var i = 0; i < scriptFlie.length; i++) {
         var fileSrc = scriptFlie[i].attributes['src'],
             fileType = scriptFlie[i].attributes['type'];
 
-        if(typeof fileType != 'undefined' && fileType.value === 'text/goo') {
+        if (typeof fileType != 'undefined' && fileType.value === 'text/goo') {
             var xmldoc = loadXML(fileSrc.value);
             me.compile(xmldoc);
         }
@@ -83,12 +86,12 @@ Go.prototype.compile = function(xmldoc) {
 Go.prototype.compileTemplate = function(xmldoc) { 
     var me = this,
         temps, beforeHtml, modefiedHtml, attrName, target;
-    temps = xmldoc.getElementsByTagName("template");
+    temps = xmldoc.getElementsByTagName('template');
 
     for (var i = 0; i < temps.length; i++) {
         beforeHtml = temps[i].innerHTML;
 
-        attrName = beforeHtml.replace(/(.*)\{\{(.*)\}\}(.*)/g, '$2').replace(/\s/g, "");
+        attrName = beforeHtml.replace(/(.*)\{\{(.*)\}\}(.*)/g, '$2').replace(/\s/g, '');
         modefiedHtml = beforeHtml.replace(/\{\{(.*)\}\}/g, me.opt.data[attrName]);
 
         if (/^\#/g.test(me.opt.ele)) {
@@ -105,11 +108,10 @@ Go.prototype.compileTemplate = function(xmldoc) {
 }
 
 Go.prototype.compileStyle = function(xmldoc) { 
-    var me = this,
-        styleObj,
+    var styleObj,
         styleEles;
 
-    styleEles = xmldoc.getElementsByTagName("style");  
+    styleEles = xmldoc.getElementsByTagName('style');  
     styleObj = document.createElement('style');
 
     for (var i = 0; i < styleEles.length; i++) {
@@ -119,10 +121,9 @@ Go.prototype.compileStyle = function(xmldoc) {
 }
 
 Go.prototype.compileScript = function(xmldoc) { 
-    var me = this,
-        scriptObj;
+    var scriptObj;
 
-    scriptObj = xmldoc.getElementsByTagName("script");  
+    scriptObj = xmldoc.getElementsByTagName('script');  
     for (var i = 0; i < scriptObj.length; i++) {
         eval(scriptObj[i].innerHTML);
     }
@@ -131,8 +132,5 @@ Go.prototype.compileScript = function(xmldoc) {
 // (function() {
 
 // })()
-
-
-
 
 

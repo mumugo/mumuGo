@@ -5,7 +5,45 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app"></div>
+
+    <template id="todoHead">
+        <div>mumuGo 的 todo List</div>
+    </template>
+
+    <template id="todoFooter">
+        <div>total list</div>
+    </template>
+
+    <script src="./lib/Vue.js"></script>
+
+    <script>
+    	// new Vue({
+        //     el: '#app',
+        //     template: '<App/>',
+        //     components: { App }
+        // })
+
+        // var todoHead = Vue.extend({
+        //     template: '<div>mumuGo 的 todo List</div>'
+        // });
+
+        // var todoFooter = Vue.extend({
+        //     template: '<div>total list</div>'
+        // })
+
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'mumuGo'
+            },
+            template: '<div><todo-head></todo-head><todo-footer></todo-footer></div>',
+            components: {
+                'todo-head' : 'todoHead',
+                'todo-footer': 'todoFooter'
+            }
+            
+        })
+    </script>
 </body>
 </html>
