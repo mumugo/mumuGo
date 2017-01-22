@@ -77,6 +77,7 @@ Go.prototype.compile = function(xmldoc) {
     me.compileTemplate(xmldoc);
     me.compileStyle(xmldoc);
     me.compileScript(xmldoc);
+    console.log('over')
 }
 
 Go.prototype.compileTemplate = function(xmldoc) { 
