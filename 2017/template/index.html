@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body>
+<body></body>
 
     <div id="app" class="app"></div>
+    <div id="app" class="app2">
+        <head></head>
+        <foot></foot>
+    </div>
 
     <!--<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-1.10.2.min.js"></script>-->
     <script src="./test.goo" type="text/goo"></script>
@@ -15,6 +19,25 @@
     <script>
         new Go({
             ele: "#app",
+            data: {
+              name: "amy"
+            }
+        });
+
+        var Head = Go.extend({
+            template: '<div>我是Head</div>'
+        });
+
+        var Foot = Go.extend({
+            template: '<div>我是Foot</div>'
+        });
+
+        new Go({
+            ele: "#app2",
+            component: {
+                'head': Head,
+                'foot': Foot 
+            },
             data: {
               name: "amy"
             }

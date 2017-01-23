@@ -5,17 +5,12 @@
 </style>
 
 <template>
+    <input g-model="name" />
     <div id="xxx">{{name}}</div>
 </template>
 
 <script>
     console.log(123)
-    //  new Go({
-    //     ele: "#app",
-    //     data: {
-    //         name: "amy"
-    //     }
-    // });
 </script>
 
 

@@ -52,6 +52,36 @@ var loadXML = function(xmlFile) {
     return null;
 }
 
+// var book = {
+//     _year: 2004,
+//     edtion: 1
+// };
+
+// Object.defineProperty(book, 'year', {
+//     get: function() {
+//         return this._year;
+//     }, 
+//     set: function(newValue) {
+//         this._year = newValue;
+//         this.edtion += newValue - 2004
+//     }
+// });
+
+// 双向绑定
+// function bidirectionalBind(obj, key) {
+//     Object.defineProperty(obj, key, {
+//         get: function() {
+//             return this.key;
+//         }, 
+//         set: function(newValue) {
+//             this.key = newValue;
+//             obj.parentClass.didMount();
+//             // this.edtion += newValue - 2004;
+
+//         }
+//     });
+// }
+
 //生命周期 数据双向绑定
 
 var Go = function(opt) {
@@ -80,7 +110,6 @@ Go.prototype.compile = function(xmldoc) {
     me.compileTemplate(xmldoc);
     me.compileStyle(xmldoc);
     me.compileScript(xmldoc);
-    console.log('over')
 }
 
 Go.prototype.compileTemplate = function(xmldoc) { 
@@ -128,6 +157,25 @@ Go.prototype.compileScript = function(xmldoc) {
         eval(scriptObj[i].innerHTML);
     }
 }
+
+Go.prototype.component = function() {
+    
+}
+
+// Go.prototype.extend = function(opt) {
+//     var me = this;
+//     console.log(opt.template)
+// }
+
+Go.extend = function(opt) {
+    console.log(opt.template) 
+}
+
+// function initExtend() {
+
+    
+
+// }
 
 // (function() {
 

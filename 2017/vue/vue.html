@@ -5,42 +5,41 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <todo-head></todo-head>
+        <todo-footer></todo-footer>
+        <input v-model="name" />
+        <div>你的名字：{{name}}</div>
+    </div>
 
     <template id="todoHead">
-        <div>mumuGo 的 todo List</div>
+        <div>{{name}} 的 sstodo List</div>
     </template>
 
     <template id="todoFooter">
-        <div>total list</div>
+        <div>totalss list</div>
     </template>
 
     <script src="./lib/Vue.js"></script>
 
     <script>
-    	// new Vue({
-        //     el: '#app',
-        //     template: '<App/>',
-        //     components: { App }
-        // })
+        var todoHead = Vue.extend({
+            template: '<div>mumuGo 的 todo List</div>'
+        });
 
-        // var todoHead = Vue.extend({
-        //     template: '<div>mumuGo 的 todo List</div>'
-        // });
-
-        // var todoFooter = Vue.extend({
-        //     template: '<div>total list</div>'
-        // })
+        var todoFooter = Vue.extend({
+            template: '<div>total list</div>'
+        })
 
         new Vue({
             el: '#app',
             data: {
                 name: 'mumuGo'
             },
-            template: '<div><todo-head></todo-head><todo-footer></todo-footer></div>',
+            // template: '',
             components: {
-                'todo-head' : 'todoHead',
-                'todo-footer': 'todoFooter'
+                'todo-head' : todoHead,
+                'todo-footer': todoFooter
             }
             
         })
