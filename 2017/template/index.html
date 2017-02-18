@@ -4,20 +4,94 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body>
+<body></body>
 
-    <div id="app" class="app"></div>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <div id="app3">
+        <gofoot></gofoot>
+    </div>
 
     <!--<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-1.10.2.min.js"></script>-->
     <script src="./test.goo" type="text/goo"></script>
+    <script src="./lib/eventHandler.js"></script>
     <script src="./index.js"></script>
+    <!--<script src="./renderGoo.js"></script>-->
     <script>
         new Go({
-            ele: "#app",
+            ele: "#app1",
+            template: 'test.goo',
             data: {
-              name: "amy"
-            }
+              name: "amy",
+              age: 10
+            },
+            mounted: function() {
+                console.log('mounted');
+                this.data.name = 'Jack';
+                // console.log()
+            },
         });
+
+        // // 全局组件1
+        // var Head = Go.component({
+        //     template: '<div>我是Head</div>'
+        // });
+
+        // // 全局组件2 嵌套组件
+        // var Copy = Go.component({
+        //     template: '<div>版权所有</div>'
+        // });
+
+        // // 全局组件3
+        // var Foot = Go.component({
+        //     component: {
+        //         'copy': Copy
+        //     },
+        //     template: '<div>我是Foot <copy></copy></div>'
+        // });
+        
+        // new Go({
+        //     ele: "#app2",
+        //     component: {
+        //         'gohead': Head,
+        //         'gofoot': Foot 
+        //     },
+        //     template: '<div><gohead></gohead><gofoot></gofoot></div>',
+        //     data: {
+        //       name: "amy"
+        //     },
+        //     beforeCreate: function() {
+
+        //     },
+        //     create: function() {
+
+        //     },
+        //     beforeMount: function() {
+
+        //     }, 
+        //     mounted: function() {
+
+        //     },
+        //     beforeUpdate: function() {
+
+        //     },
+        //     updated: function() {
+
+        //     },
+        //     beforeDestory: function() {
+
+        //     },
+        //     destoryed: function() {
+                
+        //     }
+        // });
+// 
+        // new Go({
+        //     ele: "#app3",
+        //     component: {
+        //         'gofoot': Foot 
+        //     }
+        // });
     </script>
 </body>
 </html>

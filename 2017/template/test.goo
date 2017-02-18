@@ -1,20 +1,17 @@
 <style>
     body {
-        color: red;
+        line-height: 30px;
     }
 </style>
 
 <template>
+    <input g-model="name" />
     <div id="xxx">{{name}}</div>
+    <div>{{age }}<div>{{age }}</div><div>{{age }}</div></div>
 </template>
 
 <script>
-    new Go({
-        ele: "#app",
-        data: {
-            name: "amy"
-        }
-    });
+    console.log("来自goo文件的script");
 </script>
 
 
