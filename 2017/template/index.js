@@ -105,6 +105,8 @@ Go.prototype.init = function() {
 
     // 双向绑定数据处理
     me.bidirectionalBind();
+    
+
 }
 
 // 双向绑定
@@ -112,33 +114,81 @@ Go.prototype.bidirectionalBind = function() {
     var me = this;
     var allDoms = document.body.children;
 
-    function bind(doms) {
-        for (var i = 0; i < doms.length; i++) {
-            if (!!doms[i].attributes['g-model']) {
-                console.log(doms[i]);
-            }
+    // function bind(doms) {
+    //     for (var i = 0; i < doms.length; i++) {
+    //         if (!!doms[i].attributes['g-model']) {
+    //             console.log(doms[i]);
+    //         }
 
-            //递归查找
-            if (doms[i].children.length !== 0) {
-                bind(doms[i].children);
-            }
+    //         //递归查找
+    //         if (doms[i].children.length !== 0) {
+    //             bind(doms[i].children);
+    //         }
+    //     }
+    // }
+    function bindText(target) {
+        var eles = document.querySelectorAll('[g-text]'),
+            ele_data;
+
+        for (var i = 0; i < eles.length; i++) {
+            ele_data = eles[i].getAttribute('g-text');
+
+
         }
     }
 
-    function defProperty(obj) {
+    function bindModel(target, value) {
+        var eles = document.querySelectorAll('[g-model]'),
+            ele_data;
+            
+        for (var i = 0; i < eles.length; i++) {
+            ele_data = eles[i].getAttribute('g-model');
+
+            if(target === ele_data) {
+                eles[i].value = value || '';
+            }
+
+            //每次修改进来了2次！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+            //为g-model元素绑定keyup事件
+            if (document.addEventListener) {
+                eles[i].addEventListener('keyup',function(event) {
+                    console.log('test');
+                    var e = event || window.event;
+                    me.data[ele_data] = e.target.value;
+                },false);
+            } else {
+                eles[i].attachEvent('onkeyup',function(event){
+                    var e = event || window.event;
+                    me.data[ele_data] = e.target.value;  
+                }, false);
+            }
+        }
+        
+        
+    }
+    
+    // bindModel();
+    function defProperty(obj, isFirst) {
         for (var key in obj) {
+            if (isFirst) {
+                bindModel(key, obj[key]);
+            }
+            
             Object.defineProperty(obj, key, {
                 get: function() {
                     return this.key;
                 }, 
                 set: function(newValue) {
                     this.key = newValue;
+                    
+                    // bindText();
                     // this.edtion += newValue - 2004;
                 }
             });
         }
     }
-    defProperty(me.data)
+
+    defProperty(me.data, true);
     // bind(allDoms);
 }
 
@@ -205,8 +255,9 @@ Go.prototype.compileTemplate = function(temps, isRoot) {
         attrNames = beforeHtml.match(/\{\{([^\}\}]*)\}\}/ig);
         for (var i = 0; i < attrNames.length; i++) {
             var attr = attrNames[i].replace(/(.*)\{\{(.*)\}\}(.*)/g, '$2').replace(/\s/g, '');
+            var replace_html = '<span g-text=' + attr +'>' + me.opt.data[attr] + '</span>';     //增加g-text属性，以便双向绑定
             if (!!me.opt.data[attr]) {
-                modefiedHtml = modefiedHtml.replace(attrNames[i], me.opt.data[attr]);
+                modefiedHtml = modefiedHtml.replace(attrNames[i], replace_html);
             }
         }
     } else {
@@ -339,4 +390,9 @@ function initGlobalAPI(Go) {
  * 有几个new Go应该如何处理id重复问题
  * 你给我一个数据，我根据这个数据生成一个全新的Virtual DOM，然后跟我上一次生成的Virtual DOM去 diff，得到一个Patch，然后把这个Patch打到浏览器的DOM上去。完事。有点像版本控制打patch的思路。假设在任意时候有，VirtualDom1 == DOM1 （组织结构相同）当有新数据来的时候，我生成VirtualDom2，然后去和VirtualDom1做diff，得到一个Patch。然后将这个Patch去应用到DOM1上，得到DOM2。如果一切正常，那么有VirtualDom2 == DOM2。
  * VBS 观察者模式
+ * 
+ * vue写法
+ * bindText:处理{{}}
+ * bindModel:处理g-model，为每个元素绑定keyup事件
+ * 
  *  */ 
