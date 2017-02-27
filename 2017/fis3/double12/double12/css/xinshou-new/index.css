@@ -1,0 +1,521 @@
+/*
+新增版本号配置
+background: #0e0610 url(../../img/xinshou-new/banner.jpg?v=@PPmoneyVersion) no-repeat center 0;
+ */
+
+
+/*banner-wrap*/
+
+.banner-wrap {
+    background: #0e0610 url(../../img/xinshou-new/banner.jpg?v=@PPmoneyVersion) no-repeat center 0;
+}
+
+.banner-wrap .banner {
+    position: relative;
+    width: 1000px;
+    height: 554px;
+    margin: 0 auto;
+}
+
+
+/*share*/
+
+.ft-wrap {
+    background-color: #d97474
+}
+
+.ft-wrap .ft {
+    width: 1165px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+.share-c span {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.share-c {
+    float: left;
+    position: relative;
+    top: 20px;
+    padding-right: 40px;
+    text-align: left;
+}
+
+.share-c .bshare-custom.icon-medium-plus a {
+    width: 75px !important;
+    height: 70px !important;
+    background: url("../../img/xinshou-new/icon.png?v=@PPmoneyVersion") !important;
+    padding-left: 0 !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-qqmb {
+    background-position: 225px 0 !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-weixin {
+    background-position: 150px 0 !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-qzone {
+    background-position: 75px 0 !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-sinaminiblog:hover {
+    background-position: 300px 70px !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-qqmb:hover {
+    background-position: 225px 70px !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-weixin:hover {
+    background-position: 150px 70px !important;
+}
+
+.share-c .bshare-custom.icon-medium-plus .bshare-qzone:hover {
+    background-position: 75px 70px !important;
+}
+
+.content-wrap {
+    background-color: #f8f4f4;
+}
+
+.fir,
+.sec,
+.thi,
+.fou,
+.fif {
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.fir {
+    position: relative;
+}
+
+.login-wrap {
+    background: url(../../img/xinshou-new/banner.jpg?v=@PPmoneyVersion) no-repeat center 0;
+}
+
+.login-wrap .login {
+    position: relative;
+    width: 1000px;
+    height: 726px;
+    margin: 0 auto;
+}
+
+
+/*注册框 start*/
+
+.login-r {
+    font-weight: 500;
+    font-size: 12px;
+    width: 340px;
+    height: 405px;
+    position: absolute;
+    top: 110px;
+    right: 0;
+    color: #fff;
+    background-color: rgba(40, 11, 68, 0.3);
+}
+
+.login-r .login-hd {
+    height: 74px;
+    margin-bottom: 20px;
+    background: #ffa800;
+    font-size: 24px;
+    line-height: 74px;
+    text-align: center;
+    background: url(../../img/xinshou-new/hd-bg.png?v=@PPmoneyVersion) no-repeat 59px 36px;
+}
+
+.login-r .input-box {
+    margin: 0 0 9px 36px;
+    position: relative;
+}
+
+.login-r .warm-c {
+    height: 20px;
+    line-height: 20px;
+    padding: 0 0 10px 37px;
+}
+
+.login-r input {
+    height: 18px;
+    width: 250px;
+    padding: 11px 0 11px 15px;
+    line-height: 18px;
+    border: 1px solid #9135b7;
+    border-radius: 2px;
+    color: #81718c;
+}
+
+.spi-icon {
+    background: url(../../img/xunlei-xs/input-bg.png?v=@PPmoneyVersion) no-repeat;
+    width: 31px;
+    height: 40px;
+}
+
+.login-r .phone-icon {
+    position: absolute;
+    background-position: 7px -2px;
+    top: -3px;
+    left: 61px;
+}
+
+.login-r .password-icon {
+    position: absolute;
+    background-position: 7px -64px;
+    top: -2px;
+    left: 61px;
+}
+
+.login-r .code-icon {
+    position: absolute;
+    background-position: 7px -129px;
+    top: -2px;
+    left: 61px;
+}
+
+.login-r .code {
+    width: 151px;
+}
+
+.login-r img {
+    padding-left: 13px;
+    cursor: pointer;
+}
+
+.login-r .l-label {
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    height: 40px;
+    line-height: 40px;
+}
+
+.login-r .register {
+    display: block;
+    width: 78%;
+    padding: 0;
+    background: #fedd00;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    color: #bc7003;
+    border-radius: 2px;
+    line-height: 47px;
+    border-bottom: 3px solid #ef8200;
+}
+
+.login-r .register:hover {
+    background-color: #eed635;
+    border-bottom: 3px solid #cf7102;
+    text-decoration: none;
+}
+
+.fir-wrap {
+    padding-bottom: 30px;
+    background: url(../../img/xinshou-new/01w.png?v=@PPmoneyVersion) no-repeat center 0;
+}
+
+.fir {
+    padding: 35px 0 50px;
+    /*background: url(../../img/xinshou-new/title1.png?v=@PPmoneyVersion) no-repeat left 35px;*/
+}
+
+.sec-wrap {
+    position: relative;
+     height: 1093px;
+    background-color: #e7e5e5;
+}
+.sec-cont {
+    position: absolute;
+    top: -32px;
+    left: 0;
+    width: 100%;
+    height: 1093px;
+    background: url(../../img/xinshou-new/02.png?v=@PPmoneyVersion) no-repeat center 0;
+}
+.thi-wrap {
+    height: 680px;
+}
+.thi .btn {
+    margin-left: -188px;
+    padding: 20px 30px;
+}
+.thi-cont {
+    position: absolute;
+    top: -51px;
+    left: 0;
+    width: 100%;
+    height: 730px;
+    background: url(../../img/xinshou-new/03.png?v=@PPmoneyVersion) no-repeat center 0;
+}
+.fou-wrap {
+    height: 946px;
+    background: url(../../img/xinshou-new/03.jpg?v=@PPmoneyVersion) no-repeat center 0;
+}
+.fif-wrap {
+    height: 500px;
+}
+.fif-cont {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    background: url(../../img/xinshou-new/05.png?v=@PPmoneyVersion) no-repeat right 20px;
+}
+
+/*.fif h3 {
+    padding: 15px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.fif li span {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    color: #fff;
+    text-align: center;
+    background: url(../../img/xinshou-new/circle.png?v=@PPmoneyVersion) no-repeat center 6px;
+}
+
+.fif p {
+    color: #81718c;
+    font-size: 14px;
+    padding: 13px;
+}
+
+.fif p {
+    color: #81718c;
+    font-size: 14px;
+    padding: 13px;
+}*/
+
+.btn {
+    position: absolute;
+    bottom: 75px;
+    left: 50%;
+    margin-left: -150px;
+    padding: 20px 90px;
+    font-size: 30px;
+    color: #fff;
+    border-radius: 3px;
+    border-bottom: 5px solid #d14d29;
+    background-color: #f96038;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    text-decoration: none;
+    color: #fff;
+    background-color: #f54a1d;
+}
+
+.btn-invest,
+.btn-invalid {
+    display: block;
+    width: 165px;
+    height: 48px;
+    margin: 24px 78px;
+    line-height: 48px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ffc000;
+    border-bottom: 5px solid #da5120;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-invalid {
+    background-color: #b1b1b1;
+    border-bottom: 5px solid #888888;
+}
+
+.btn-invalid:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-invest:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #ffa200
+}
+
+.bid-list {
+    font-size: 14px;
+    text-align: center;
+}
+
+.bid-list>li {
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 316px;
+    height: 400px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.bid-list>li+li {
+    margin-left: 15px;
+}
+
+.bid-list .question {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    width: 152px;
+    height: 45px;
+    background: url(../../img/xinshou-new/flag.png?v=@PPmoneyVersion) no-repeat right 0;
+    cursor: pointer;
+}
+
+.bid-list .question>p {
+    padding-right: 33px;
+    text-align: right;
+    line-height: 48px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.bid-type {
+    padding: 33px 0 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.bid-list-bd {
+    height: 189px;
+    color: #FFFFFF;
+    background: url(../../img/xinshou-new/bid-bg.png?v=@PPmoneyVersion) no-repeat right 0;
+}
+
+.bid-rate {
+    position: relative;
+    margin: 40px 40px 0 40px;
+    padding: 10px 0 8px;
+    color: #ff4200;
+    font-weight: bold;
+    text-align: left;
+    height: 85px;
+    border-bottom: 1px solid #b0b0b0;
+}
+
+.bid-rate .main {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    font-size: 80px;
+    line-height: 45px;
+    padding: 17px 88px 0 0;
+}
+
+.bid-rate .main .sign {
+    font-size: 20px;
+    padding-left: 38px;
+    vertical-align: top;
+}
+
+.bid-rate .side {
+    display: inline-block;
+    *display: inline;
+    *zoom: s 1;
+}
+
+.bid-rate .side-top {
+    position: absolute;
+    top: 52px;
+    left: 180px;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.bid-rate .side-btm {
+    font-size: 30px;
+    position: absolute;
+    top: 20px;
+    left: 180px;
+    font-weight: 500;
+}
+
+.bid-time {
+    color: #3f3148;
+    font-size: 18px;
+    padding: 15px 0 25px;
+}
+
+.ready {
+    border: 1px solid #6e308e;
+    margin: 30px 50px;
+    line-height: 53px;
+    color: #6e308e;
+    font-size: 16px;
+}
+
+.bid-tips {
+     display: none; 
+    width: 230px;
+    height: 73px;
+    position: absolute;
+    top: 56px;
+    right: -8px;
+    padding: 12px;
+    line-height: 1.8em;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 6px;
+    background-color: #14cbf6;
+    cursor: auto;
+    text-align: left;
+}
+
+.bid-tips:after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 220px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #14cbf6;
+}
+
+.bid-tips:before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 0px;
+    width: 100%;
+    height: 15px;
+}
+
+.bid-list .question:hover .bid-tips {
+    display: block;
+}
+
+.yellow {
+    color: #ffea00;
+}
+
+.purple {
+    color: #d59cf2;
+}
+.input-label{
+    position: absolute;
+    width: 100%;
+    top: 13px;
+    left: 15px;
+    color: #8C7676;
+}
